@@ -25,6 +25,13 @@ class FakeTestRepository : TasksRepository {
         return observableTasks
     }
 
+    fun addTasks(vararg tasks: Task) {
+        for (task in tasks) {
+            tasksServiceData[task.id] = task
+        }
+        runBlocking {refreshTasks()}
+    }
+
     override suspend fun refreshTask(taskId: String) {
         TODO("Not yet implemented")
     }
